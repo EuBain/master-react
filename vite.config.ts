@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'https://www.tayrsi.cn/master-react/',
+  // base:'https://www.tayrsi.cn/master-react/',
   plugins: [unocss(),react()],
   server: {
     port: 8888, //开发服务器端口

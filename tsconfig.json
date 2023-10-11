@@ -6,7 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     //基路径
-    "baseUrl": "./",
+    "baseUrl": ".",
     //配置路径
     "paths": {
       "@/*": ["src/*"],
