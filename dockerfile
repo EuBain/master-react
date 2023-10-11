@@ -8,7 +8,7 @@ RUN  mkdir /etc/nginx/ssl
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 将Vue项目的构建产物复制到新建的目录
-COPY bei.html /usr/share/nginx/html
+COPY dist /usr/share/nginx/html
 
 # 暴露Nginx的80端口
 EXPOSE 80
