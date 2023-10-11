@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     dasasdas
     {/* <HashRouter> */}
-    <BrowserRouter>
+    <BrowserRouter basename='/master-react'>
       <App />
     </BrowserRouter>
     {/* </HashRouter> */}
