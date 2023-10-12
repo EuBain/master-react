@@ -40,6 +40,9 @@ devDependencies:
   '@unocss/preset-icons':
     specifier: ^0.56.5
     version: 0.56.5
+  '@unocss/preset-uno':
+    specifier: ^0.56.5
+    version: 0.56.5
   '@vitejs/plugin-react':
     specifier: ^4.0.3
     version: 4.0.3(vite@4.4.5)
