@@ -4,6 +4,7 @@ import { Tabs } from "antd"
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useOutlet } from "react-router-dom";
 import { usePageTabs } from "@/utils/hooks";
+import { list } from "@/routers";
 
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -61,7 +62,7 @@ const PageTabs = () => {
         onEdit={onEdit}
         items={Object.entries(keepElement).map(([pathname, element]: any) => {
             return { 
-                label: `${pathname}`, 
+                label: `${list[pathname]}`, 
                 // children: element, 
                 key: pathname 
             }

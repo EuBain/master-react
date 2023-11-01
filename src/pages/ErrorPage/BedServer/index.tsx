@@ -1,10 +1,10 @@
 
 import React from 'react'
 
-const BedServer = ({child}) => {
+const BedServer = () => {
   return (
     <>
-      {child}
+  
     <div>BedServer</div>
   
     </>

@@ -1,4 +1,4 @@
-import { RoutesType, handlerRoutes } from "."
+import { RoutesType } from "."
 export const HomeRoutes: RoutesType[] =[
     {
         name: '主页',
@@ -7,9 +7,8 @@ export const HomeRoutes: RoutesType[] =[
         children: [
             {
                 name: '主页',
-                path: '/home',
-                element: 'demo1',
-                redirect: true,
+                path: '/',
+                redirect: 'demo1',
             },
             {
                 name: 'demo',
@@ -29,3 +28,6 @@ export const HomeRoutes: RoutesType[] =[
         ]
     },
 ]
+
+
+
