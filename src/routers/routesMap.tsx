@@ -8,7 +8,7 @@ const Demo = lazy(() => import('@/pages/demo'))
 const BadServer = lazy(() => import('@/pages/ErrorPage/BedServer'))
 const NotFind = lazy(() => import('@/pages/ErrorPage/NotFind'))
 
-const component:Record<string, LazyExoticComponent<() => JSX.Element>> = {
+export const component:Record<string, LazyExoticComponent<() => JSX.Element>> = {
         Home:Home,
         MyLayout:MyLayout,
         Demo:Demo,
