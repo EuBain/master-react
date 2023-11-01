@@ -10,6 +10,8 @@ import {  presetAttributify, presetUno, presetIcons } from 'unocss'
 // https://vitejs.dev/config/
 export default defineConfig({
   base:'https://www.tayrsi.cn/master-react/',
+  //envDir:'env', //环境变量加载文件路径
+  envPrefix:['BASE_','MR_'], //vite自定义环境变量默认识别VITE_前缀，在此修改，不能为''
   plugins: [
     unocss({
       presets: [
@@ -40,7 +42,4 @@ export default defineConfig({
   }
 })
 
-function unopreset() {
-  throw new Error('Function not implemented.')
-}
 

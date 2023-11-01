@@ -7,3 +7,5 @@ type Prefix = 'u-'
 declare module 'react' {
   interface HTMLAttributes<T> extends AttributifyAttributes, Partial<Record<AttributifyNames<Prefix>, string>> {}
 }
+
+// declare module '@/redux/store'
