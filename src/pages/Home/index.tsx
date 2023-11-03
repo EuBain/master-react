@@ -8,6 +8,7 @@ import { Link, Outlet, useHref, useLocation, useNavigate } from 'react-router-do
 
 import MyLayout from '../Layout';
 import { useEffect } from 'react';
+import { Spin } from 'antd';
 
 // 类型导入
 
@@ -31,6 +32,9 @@ const Home = () => {
   return (
     <>
    <div> 1111</div>
+   {/* <Spin tip="Loading" size="large" style={{position:'a', bottom:'0'}} >
+                            <div className="content" />
+                        </Spin> */}
     {/* <MyLayout>
     </MyLayout> */}
     </>

@@ -16,20 +16,21 @@ export const usePageTabs = () =>  {
         })
     }
 
-    // return useMemo(() => {
-    //     return{
-    //     keepElement,
-    //     keepalive,
-    //     setKeepalive
-    //     }
-    // }, [keepElement, keepalive])
-
-    return{
-        keepElement,
+    return useMemo(() => {
+        return{
         addElement,
+        keepElement,
         keepalive,
         setKeepalive
         }
+    }, [keepElement, keepalive])
+
+    // return{
+    //     keepElement,
+    //     addElement,
+    //     keepalive,
+    //     setKeepalive
+    //     }
    
 } 
 

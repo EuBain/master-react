@@ -1,7 +1,8 @@
-import { Layout, theme } from "antd"
+import { Layout, Spin, theme } from "antd"
 import MyHeader from "./component/MyHeader"
 import Navigate from "./component/Navigate"
 import Container from "./component/Container"
+import { Suspense } from "react"
 
 
 const MyLayout = () => {
@@ -15,7 +16,7 @@ const MyLayout = () => {
                 <Layout>
                     <Navigate  background={colorBgContainer} />
                     <Layout style={{ padding: '0 24px 24px' }}>
-                        <Container background={colorBgContainer}/>
+                            <Container background={colorBgContainer}/>
                     </Layout>
                 </Layout>
             </Layout>

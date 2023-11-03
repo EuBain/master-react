@@ -1,7 +1,7 @@
 // import { changeKeepElement } from "@/redux/slice/pageTabSlice";
 // import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { Tabs } from "antd"
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Suspense, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useOutlet } from "react-router-dom";
 // import { keepalive } from "@/routers";
 import ContextPageTab from "@/context/ContextPageTabs";
@@ -76,7 +76,9 @@ const PageTabs = () => {
       </div>
         { Object.entries(keepElement).map(([pathname, element]: any) => 
                 <div key ={pathname} hidden={location.pathname !== pathname} >
+                  <Suspense fallback={<h2>🌀 Loading...</h2>}>
                     {element}
+                    </Suspense>
                 </div>
             )
         }

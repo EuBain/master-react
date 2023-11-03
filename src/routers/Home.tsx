@@ -14,7 +14,7 @@ export const HomeRoutes: RoutesType[] =[
                 name: '主页3',
                 path: '/home',
                 element:  'Home',
-                keepalive: false,
+                keepalive: true,
             },
             {
                 name: 'demo',

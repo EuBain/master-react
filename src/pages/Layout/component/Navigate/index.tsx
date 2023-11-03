@@ -1,16 +1,17 @@
 import ContextPageTab from "@/context/ContextPageTabs";
 import { Menu, MenuProps } from "antd"
 import Sider from "antd/es/layout/Sider"
-import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { startTransition, useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HomeRoutes } from '@/routers/Home'
 
 interface Proptype {
   background: string,
 };
 
-const items2: MenuProps['items'] = HomeRoutes.map(
+const items2: MenuProps['items'] = HomeRoutes[0].children?.map(
     (icon:any) => {
+      if(icon.redirect) return
       return {
         key: `${icon.path}`,
         label: ` ${icon.name}`,
@@ -28,27 +29,33 @@ const items2: MenuProps['items'] = HomeRoutes.map(
 
 const Navigate = React.memo((props: Proptype) => {
   const navigate = useNavigate()
+  const location = useLocation()
   let {keepElement, keepalive} = useContext(ContextPageTab)
  
   useEffect(() => {
     // console.log(items2)
     // console.log(keepElement)
-    console.log('侧边栏重新渲染了')
+  console.log('侧边栏重新渲染了')
   },[keepElement])
+
+
     const { background } = props;
     return (
         <>
-            <Sider width={200} style={{ background }}>
+            <Sider width={200}
+             style={{ background }}
+             >
             <Menu
                 mode="inline"
-                defaultSelectedKeys={['/home']}
-                defaultOpenKeys={['/']}
+                selectedKeys={[location.pathname]}
+                // defaultOpenKeys={['/']}
                 style={{ height: '100%', borderRight: 0 }}
                 items={items2}
                 // onClick={() => {}}
                 onClick={({key}) =>{ 
                   console.log(key)
-                  navigate(key)}}
+                  navigate(key)
+                }}
             />
             </Sider>
         </>
