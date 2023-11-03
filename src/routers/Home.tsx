@@ -1,29 +1,44 @@
 import { RoutesType } from "."
 export const HomeRoutes: RoutesType[] =[
     {
-        name: '主页',
+        name: '主页1',
         path: '/',
         element:  'MyLayout',
         children: [
             {
-                name: '主页',
+                name: '主页2',
                 path: '/',
-                redirect: 'demo1',
+                redirect: 'home',
+            },
+            {
+                name: '主页3',
+                path: '/home',
+                element:  'Home',
+                keepalive: false,
             },
             {
                 name: 'demo',
-                path: 'demo1',
+                path: '/demo1',
                 element:  'Demo',
+                keepalive: true,
+            },
+            {
+                name: '事件',
+                path: '/index',
+                element: 'Index',
+                keepalive: true,
             },
             {
                 name: 'bedserver',
-                path: '503',
-                element:  'BedServer',
+                path: '/503',
+                element: 'BadServer',
+                keepalive: true,
             },
             {
                 name: 'notfind',
-                path: '212',
+                path: '/212',
                 element: 'NotFind',
+                keepalive: true,
             },
         ]
     },

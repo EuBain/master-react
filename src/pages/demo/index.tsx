@@ -8,7 +8,7 @@ const Demo = () => {
   const element = useContext(Context);
   console.log(element)
     const [num, setNum] = useState(2)
-    const [array, setArray] = useState<any>([1]) 
+    let [array, setArray] = useState<any>([1]) 
     // useState批量处理
     const add = () =>{
         // setNum(num+1);
@@ -21,6 +21,8 @@ const Demo = () => {
         // setArray(array => [num,...array]
           // .map(index => <div key={index}>index</div>)
           // );
+
+      
     }
 
 

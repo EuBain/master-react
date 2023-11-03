@@ -11,6 +11,7 @@ import store from '@/redux/store'
 // 类型导入
 // 样式文件
 import 'virtual:uno.css';
+import './style.scss'
 
 
 // console.log(' import.meta.env.MODE: ',  import.meta.env.MODE);

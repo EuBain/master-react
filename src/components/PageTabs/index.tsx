@@ -1,10 +1,10 @@
 // import { changeKeepElement } from "@/redux/slice/pageTabSlice";
 // import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { Tabs } from "antd"
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useOutlet } from "react-router-dom";
-import { usePageTabs } from "@/utils/hooks";
-import { list } from "@/routers";
+// import { keepalive } from "@/routers";
+import ContextPageTab from "@/context/ContextPageTabs";
 
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -19,9 +19,12 @@ const PageTabs = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const element = useOutlet()
-    const {keepElement, keepalive} = usePageTabs()
-    keepElement[location.pathname] = element
-    console.log(keepElement)
+    const {keepElement,addElement, keepalive} = useContext(ContextPageTab)
+    useLayoutEffect(() => {
+      addElement(location.pathname,element)
+      console.log(keepElement)
+  },[location.pathname])
+
     const [activeKey, setActiveKey] = useState(defaultPanes[0].key);
     const [items, setItems] = useState(defaultPanes);
     const newTabIndex = useRef(0);
@@ -54,27 +57,30 @@ const PageTabs = () => {
       };
     return (
       <>
+      <div hidden={!keepalive[location.pathname]}>
         <Tabs
-        hideAdd
-        onChange={onChange}
-        activeKey={location.pathname}
-        type="editable-card"
-        onEdit={onEdit}
-        items={Object.entries(keepElement).map(([pathname, element]: any) => {
-            return { 
-                label: `${list[pathname]}`, 
-                // children: element, 
-                key: pathname 
-            }
-        })}
-        > 
+          hideAdd
+          onChange={onChange}
+          activeKey={location.pathname}
+          type="editable-card"
+          onEdit={onEdit}
+          items={Object.entries(keepElement).map(([pathname, element]: any) => {
+              return { 
+                  label: `${keepalive[pathname]}`, 
+                  // children: element, 
+                  key: pathname 
+              }
+          })}
+          > 
         </Tabs>
+      </div>
         { Object.entries(keepElement).map(([pathname, element]: any) => 
                 <div key ={pathname} hidden={location.pathname !== pathname} >
                     {element}
                 </div>
             )
         }
+        { !keepalive[location.pathname] && element}
          </>
     )
 }

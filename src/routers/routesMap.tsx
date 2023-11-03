@@ -7,12 +7,14 @@ const MyLayout = lazy(() => import('@/pages/Layout'))
 const Demo = lazy(() => import('@/pages/demo'))
 const BadServer = lazy(() => import('@/pages/ErrorPage/BedServer'))
 const NotFind = lazy(() => import('@/pages/ErrorPage/NotFind'))
+const Index = lazy(() => import('@/pages/Event'))
 
 export const component:Record<string, LazyExoticComponent<() => JSX.Element>> = {
-        Home:Home,
-        MyLayout:MyLayout,
-        Demo:Demo,
-        BadServer:BadServer,
-        NotFind:NotFind,
+        Home,
+        MyLayout,
+        Demo,
+        BadServer,
+        NotFind,
+        Index,
 }
 
