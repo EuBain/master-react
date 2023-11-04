@@ -27,7 +27,7 @@ const Demo = () => {
   return (
     <div className="demo">
       <div key="1">{num}</div>
-      <BedServer child="lalalala"></BedServer>
+      <BedServer></BedServer>
       <button onClick={add}>+</button>
       {/* { num && ()=> for(let c =0; c < num; c++) {
         }} */}
