@@ -17,4 +17,3 @@ export const component:Record<string, LazyExoticComponent<() => JSX.Element>> = 
         NotFind,
         Index,
 }
-
