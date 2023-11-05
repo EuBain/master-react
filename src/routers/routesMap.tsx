@@ -6,6 +6,9 @@ const Demo = lazy(() => import("@/pages/demo"));
 const BadServer = lazy(() => import("@/pages/ErrorPage/BedServer"));
 const NotFind = lazy(() => import("@/pages/ErrorPage/NotFind"));
 const Index = lazy(() => import("@/pages/Event"));
+const Jenkins = lazy(() => import("@/pages/Jenkins"));
+const Tayrsi = lazy(() => import("@/pages/Tayrsi"));
+
 
 export const component: Record<
   string,
@@ -17,4 +20,6 @@ export const component: Record<
   BadServer,
   NotFind,
   Index,
+  Jenkins,
+  Tayrsi,
 };
