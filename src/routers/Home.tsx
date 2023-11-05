@@ -40,6 +40,19 @@ export const HomeRoutes: RoutesType[] =[
                 element: 'NotFind',
                 keepalive: true,
             },
+            {
+                name: 'jenkins',
+                path: '/jenkins',
+                element: 'Jenkins',
+                keepalive: true,
+            },
+            {
+                name: 'tayrsi',
+                path: '/tayrsi',
+                element: 'Tayrsi',
+                keepalive: true,
+            },
+
         ]
     },
 ]

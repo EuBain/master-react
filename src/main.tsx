@@ -8,12 +8,28 @@ import App from './App.tsx';
 import {  BrowserRouter } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from '@/redux/store'
+import WujieReact from "wujie-react";
 // 类型导入
 // 样式文件
 import 'virtual:uno.css';
 import './style.scss'
 
+function fetch(url, options) {
+  return window.fetch(url, { ...options, credentials: "omit" });
+}
 
+WujieReact.setupApp({
+  name: "tayrsi",
+  url: "https://tayrsi.cn/",
+  exec: true,
+  fetch,
+});
+WujieReact.setupApp({
+  name: "jenkins",
+  url: "//jenkins.tayrsi.cn/",
+  exec: true,
+  fetch,
+});
 // console.log(' import.meta.env.MODE: ',  import.meta.env.MODE);
 // console.log(' import.meta.env.BASE_URL: ',  import.meta.env.BASE_URL);
 // console.log(' import.meta.env.PROD: ',  import.meta.env.PROD);
