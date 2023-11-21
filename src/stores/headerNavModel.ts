@@ -17,8 +17,6 @@ export const headerNavModel = () => {
   if(!_curSubApp.current) {
       _curSubApp.current = subApp
     }
-
-
   const setCurSubAPP = (params) => {
     _curSubApp.current = params
   }
