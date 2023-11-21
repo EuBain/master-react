@@ -20,9 +20,13 @@ export default function Tayrsi() {
       height="100%"
       name="tayrsi"
       // url={react16Url}
-      url='//tayrsi.cn/'
-      // sync={!path}
+      url='https://www.tayrsi.cn/master-react/'
+      sync={true}
       props={props}
     ></WujieReact>
+
+    // <iframe src="https://jenkins.tayrsi.cn/" frameborder="0"></iframe>
+    // <iframe src="http://chat.fancyqb.cn/" frameborder="0"></iframe>
+
   );
 }

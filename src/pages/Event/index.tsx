@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react"
         }
         refObj.current.addEventListener('click',handler)
         return () => {
-            refObj.current.removeEventListener('click',handler)
+            if( refObj.current) refObj.current.removeEventListener('click',handler)
         }
     },[])
     const handleClick = ()=>{

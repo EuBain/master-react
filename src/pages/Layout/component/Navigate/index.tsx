@@ -27,6 +27,14 @@ const items2: MenuProps['items'] = HomeRoutes[0].children?.map(
     },
   );
 
+
+  // items2.push({
+  //       key: '/tayrsi/212',
+  //       label: `测试`,
+  //     }
+  //   )
+
+
 const Navigate = React.memo((props: Proptype) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -47,7 +55,7 @@ const Navigate = React.memo((props: Proptype) => {
              >
             <Menu
                 mode="inline"
-                selectedKeys={[location.pathname]}
+                // selectedKeys={[location.pathname]}
                 // defaultOpenKeys={['/']}
                 style={{ height: '100%', borderRight: 0 }}
                 items={items2}

@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import hostMap from "../hostMap";
 import WujieReact from "wujie-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function Jenkins() {
+export default function ReactMicro2() {
   const navigation = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const path = location.pathname.replace("/react16-sub", "").replace("/react16", "").replace("/",""); ////
   // const react16Url = hostMap("//localhost:7600/") + path;
+  useEffect(() => {
+    console.log('2重新渲染')
+  })
+  // useEffect(() => {
+  //   console.log(location.pathname)
+  //   const [,childApp,...router] = location.pathname.split('/')
+  //   // console.log({childApp,router})
+  // },[location.pathname])
   const props = {
     jump: (name) => {
       navigation(`/${name}`);
@@ -18,12 +26,15 @@ export default function Jenkins() {
     <WujieReact
       width="100%"
       height="100%"
-      name="jenkins"
+      name="ReactMicro2"
       // url={react16Url}
-      url='https://www.tayrsi.cn/'
-      // sync={!path}
+      url='http://localhost:8890/master-react/'
+      sync={false}
       props={props}
-      
     ></WujieReact>
+
+    // <iframe src="https://jenkins.tayrsi.cn/" frameborder="0"></iframe>
+    // <iframe src="http://chat.fancyqb.cn/" frameborder="0"></iframe>
+
   );
 }

@@ -8,6 +8,8 @@ const NotFind = lazy(() => import("@/pages/ErrorPage/NotFind"));
 const Index = lazy(() => import("@/pages/Event"));
 const Jenkins = lazy(() => import("@/pages/Jenkins"));
 const Tayrsi = lazy(() => import("@/pages/Tayrsi"));
+const ReactMicro = lazy(() => import("@/pages/ReactMicro"));
+const ReactMicro2 = lazy(() => import("@/pages/ReactMicro2"));
 
 
 export const component: Record<
@@ -22,4 +24,6 @@ export const component: Record<
   Index,
   Jenkins,
   Tayrsi,
+  ReactMicro,
+  ReactMicro2,
 };

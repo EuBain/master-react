@@ -80,7 +80,16 @@ function createStore<T extends {}>(store: () => T) {
       >;
     };
   }
+
+  return {
+    useModel,
+    connectModel,
+    StoreProvider,
+    getModel,
+  }
 }
+
+export default createStore;
 
 /** 浅对比对象 */
 function Shallow<T>(obj1: T, obj2: T): boolean;
