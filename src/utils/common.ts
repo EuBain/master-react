@@ -39,5 +39,23 @@ function scrollPageTitleFn ():any{
         // });
     }
 }
+const map: Record<string, Record<string, string>> = {
+    '8889':{
+        production: 'https://www.tayrsi.cn/react-micro1/',
+        development: 'http://localhost:8889/react-micro1/'
+    },
+    '8890':{
+        production: 'https://www.tayrsi.cn/react-micro2/',
+        development: 'http://localhost:8890/react-micro2/'
+    }
+}
 
-  
+export function matchHost (host: keyof typeof map) {
+try {
+    if(process.env.NODE_ENV) {
+        return map[host][process.env.NODE_ENV]}
+} catch {
+    console.log("process.env可能不存在")
+    return map[host]['development']
+}
+}

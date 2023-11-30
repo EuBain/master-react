@@ -1,4 +1,5 @@
 import { useModel } from "@/stores";
+import { matchHost } from "@/utils/common";
 import React, { useEffect, useState } from "react";
 // import hostMap from "../hostMap";
 import WujieReact from "wujie-react";
@@ -26,7 +27,7 @@ export default function ReactMicro() {
       height="100%"
       name="ReactMicro"
       // url={react16Url}
-      url="http://localhost:8889/react-micro1/"
+      url={ matchHost("8889")}
       sync={false}
       props={props}
     ></WujieReact>

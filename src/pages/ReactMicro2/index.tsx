@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import WujieReact from "wujie-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useModel } from "@/stores";
+import { matchHost } from "@/utils/common";
 
 export default function ReactMicro2() {
   const navigation = useNavigate();
@@ -33,7 +34,7 @@ export default function ReactMicro2() {
       height="100%"
       name="ReactMicro2"
       // url={react16Url}
-      url='http://localhost:8890/react-micro1/'
+      url={matchHost("8890")}
       sync={false}
       props={props}
     ></WujieReact>

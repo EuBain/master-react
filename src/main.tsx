@@ -14,6 +14,7 @@ import { StoreProvider } from './stores/index';
 // 样式文件
 import 'virtual:uno.css';
 import './style.scss'
+import { matchHost } from './utils/common.ts';
 
 // function fetch(url, options) {
 //   return window.fetch(url, { ...options, credentials: "include" });
@@ -21,25 +22,25 @@ import './style.scss'
 
 WujieReact.setupApp({
   name: "ReactMicro",
-  url: "http://localhost:8889/react-micro1/",
+  url: matchHost("8889"),
   exec: true,
   alive:true,
   // fetch,
 });
 WujieReact.setupApp({
   name: "ReactMicro2",
-  url: "http://localhost:8890/react-micro2/",
+  url:  matchHost("8890"),
   exec: true,
   alive:true,
   // fetch,
 });
 WujieReact.preloadApp({
   name:'ReactMicro',
-  url:'http://localhost:8889/react-micro1/',
+  url:matchHost("8889"),
 })
 WujieReact.preloadApp({
   name:'ReactMicro2',
-  url:'http://localhost:8890/react-micro2/',
+  url: matchHost("8890"),
 })
 // WujieReact.setupApp({
 //   name: "tayrsi",
