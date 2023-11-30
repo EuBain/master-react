@@ -26,7 +26,7 @@ export default function ReactMicro() {
       height="100%"
       name="ReactMicro"
       // url={react16Url}
-      url="http://localhost:8889/master-react/"
+      url="http://localhost:8889/react-micro1/"
       sync={false}
       props={props}
     ></WujieReact>
