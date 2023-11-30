@@ -19,11 +19,11 @@ import { Spin } from 'antd';
 
 const Home = () => {
   // const dispatch = useAppDispatch()
-  useEffect(() => {
-    // let currentTitle = document.title;
-    // dispatch(changeWebTitle(currentTitle))
-    console.log('home重新渲染了')
-  })
+  // useEffect(() => {
+  //   // let currentTitle = document.title;
+  //   // dispatch(changeWebTitle(currentTitle))
+  //   // console.log('home重新渲染了')
+  // })
 
   // const location = useLocation()
   // console.log('location',location,'navigation')

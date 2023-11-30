@@ -46,9 +46,9 @@ export const useOnSubApp = (subApp: string, params: string[]) => {
 
 export const useEmitSubApp = (subApp: string, params: string[]) => {
   const [flag, setFlag] = useState<any>({})
-  const subAppMount = useCallback((subApp: string,boolean: boolean) => {
+  const subAppMount =(subApp: string,boolean: boolean) => {
     setFlag((flag:any) => ({...flag,[subApp]:boolean}) )
-  },[]); 
+  }
   useEffect(() => {
     bus.$on("ReactMicroMount", subAppMount);
     bus.$on("ReactMicro2Mount", subAppMount);

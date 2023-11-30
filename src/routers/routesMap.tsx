@@ -1,4 +1,6 @@
 import { LazyExoticComponent, lazy } from "react";
+import ReactMicro from "@/pages/ReactMicro";
+import ReactMicro2 from "@/pages/ReactMicro2";
 
 const Home = lazy(() => import("@/pages/Home"));
 const MyLayout = lazy(() => import("@/pages/Layout"));
@@ -8,13 +10,14 @@ const NotFind = lazy(() => import("@/pages/ErrorPage/NotFind"));
 const Index = lazy(() => import("@/pages/Event"));
 const Jenkins = lazy(() => import("@/pages/Jenkins"));
 const Tayrsi = lazy(() => import("@/pages/Tayrsi"));
-const ReactMicro = lazy(() => import("@/pages/ReactMicro"));
-const ReactMicro2 = lazy(() => import("@/pages/ReactMicro2"));
+// const ReactMicro = lazy(() => import("@/pages/ReactMicro"));
+// const ReactMicro2 = lazy(() => import("@/pages/ReactMicro2"));
+
 
 
 export const component: Record<
   string,
-  LazyExoticComponent<() => JSX.Element>
+  LazyExoticComponent<() => JSX.Element>|(() => JSX.Element)
 > = {
   Home,
   MyLayout,

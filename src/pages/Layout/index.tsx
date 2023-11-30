@@ -15,7 +15,7 @@ const MyLayout = () => {
       <Layout u-h="100vh" u-min-w="xl">
         <MyHeader />
         <Layout>
-          {/* <Navigate  background={colorBgContainer} /> */}
+          <Navigate />
           <Layout style={{ padding: "0 24px 24px" }}>
               <Container />
           </Layout>

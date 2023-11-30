@@ -6,7 +6,7 @@ import "./index.scss";
 const aa = 1 || 3;
 const Demo = () => {
   const element = useContext(Context);
-  console.log(element);
+  // console.log(element);
   const [num, setNum] = useState(2);
   let [array, setArray] = useState<any>([1]);
   // useState批量处理
