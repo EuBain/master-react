@@ -21,25 +21,25 @@ import './style.scss'
 
 WujieReact.setupApp({
   name: "ReactMicro",
-  url: "http://localhost:8889/master-react/",
+  url: "http://localhost:8889/react-micro1/",
   exec: true,
   alive:true,
   // fetch,
 });
 WujieReact.setupApp({
   name: "ReactMicro2",
-  url: "http://localhost:8890/master-react/",
+  url: "http://localhost:8890/react-micro2/",
   exec: true,
   alive:true,
   // fetch,
 });
 WujieReact.preloadApp({
   name:'ReactMicro',
-  url:'http://localhost:8889/master-react/',
+  url:'http://localhost:8889/react-micro1/',
 })
 WujieReact.preloadApp({
   name:'ReactMicro2',
-  url:'http://localhost:8890/master-react/',
+  url:'http://localhost:8890/react-micro2/',
 })
 // WujieReact.setupApp({
 //   name: "tayrsi",

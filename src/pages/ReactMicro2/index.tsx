@@ -33,7 +33,7 @@ export default function ReactMicro2() {
       height="100%"
       name="ReactMicro2"
       // url={react16Url}
-      url='http://localhost:8890/master-react/'
+      url='http://localhost:8890/react-micro1/'
       sync={false}
       props={props}
     ></WujieReact>
