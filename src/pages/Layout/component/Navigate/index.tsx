@@ -4,12 +4,40 @@ import Sider from "antd/es/layout/Sider"
 import React, { startTransition, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomeRoutes } from '@/routers/Home'
+import { useModel } from "@/stores";
 
 interface Proptype {
   background: string,
 };
 
-const items2: MenuProps['items'] = HomeRoutes[0].children?.map(
+
+
+  // items2.push({
+  //       key: '/tayrsi/212',
+  //       label: `测试`,
+  //     }
+  //   )
+
+
+const Navigate = React.memo((props: Proptype) => {
+  const navigate = useNavigate()
+  // const location = useLocation()
+  // let {keepElement, keepalive} = useContext(ContextPageTab)
+  const {subAppParams, setSubAppParams} = useModel('subAppParams')
+  const  {
+    curSubApp,
+  } = useModel('headerNav')
+  const {navList} = useModel('navList')
+  // console.log(navList)
+
+  // const item = subAppParams[curSubApp].map(
+  //   (sub) => {
+
+
+  //   }
+  // )
+
+  const items2: MenuProps['items'] = HomeRoutes[0].children?.map(
     (icon:any) => {
       if(icon.redirect) return
       return {
@@ -27,16 +55,12 @@ const items2: MenuProps['items'] = HomeRoutes[0].children?.map(
     },
   );
 
-const Navigate = React.memo((props: Proptype) => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  let {keepElement, keepalive} = useContext(ContextPageTab)
- 
-  useEffect(() => {
-    // console.log(items2)
-    // console.log(keepElement)
-  console.log('侧边栏重新渲染了')
-  },[keepElement])
+
+  // useEffect(() => {
+  //   // console.log(items2)
+  //   // console.log(keepElement)
+  // console.log('侧边栏重新渲染了')
+  // },[keepElement])
 
 
     const { background } = props;
@@ -47,7 +71,7 @@ const Navigate = React.memo((props: Proptype) => {
              >
             <Menu
                 mode="inline"
-                selectedKeys={[location.pathname]}
+                // selectedKeys={[location.pathname]}
                 // defaultOpenKeys={['/']}
                 style={{ height: '100%', borderRight: 0 }}
                 items={items2}

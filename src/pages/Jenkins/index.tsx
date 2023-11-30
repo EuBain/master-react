@@ -20,7 +20,7 @@ export default function Jenkins() {
       height="100%"
       name="jenkins"
       // url={react16Url}
-      url='//jenkins.tayrsi.cn/'
+      url='https://www.tayrsi.cn/'
       // sync={!path}
       props={props}
       

@@ -1,90 +1,104 @@
 // import { changeKeepElement } from "@/redux/slice/pageTabSlice";
 // import { useAppDispatch, useAppSelector } from "@/utils/hooks";
-import { Tabs } from "antd"
-import { Suspense, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Tabs } from "antd";
+import { Suspense, useContext, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useOutlet } from "react-router-dom";
 // import { keepalive } from "@/routers";
 import ContextPageTab from "@/context/ContextPageTabs";
-
+import WujieReact from "wujie-react";
+import { useEmitSubApp, useLocationPath, useOnSubApp } from "@/utils/hooks";
+import { useModel } from "@/stores";
+const { bus } = WujieReact;
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
-const defaultPanes = new Array(2).fill(null).map((_, index) => {
-  const id = String(index + 1);
-  return { label: `Tab ${id}`, children: `Content of Tab Pane ${index + 1}`, key: id };
-});
-
 const PageTabs = () => {
+  const [subApp, pathname,params] = useLocationPath();
+  // const navigate = useNavigate();
+  const element = useOutlet();
+  const {subAppParams, setSubAppParams} = useModel('subAppParams')
+  const  {
+    getCurRoute,
+    setCurRoute,
+    curSubApp,
+    navigate,
+    setCurSubAPP,
+  } = useModel('headerNav')
+  // const [curSubApp,SetCurSubAPP] = useState('')
+  // const [curPathname, setCurPathname] = useState('')
 
-    const location = useLocation();
-    const navigate = useNavigate();
-    const element = useOutlet()
-    const {keepElement,addElement, keepalive} = useContext(ContextPageTab)
-    useLayoutEffect(() => {
-      addElement(location.pathname,element)
-      console.log(keepElement)
-  },[location.pathname])
+  useEmitSubApp(curSubApp, params);
+  // const { keepElement, addElement, keepalive } = useContext(ContextPageTab);
+  // useEffect(() => {
+  //   addElement(pathname, element);
+  // }, [pathname]);
 
-    const [activeKey, setActiveKey] = useState(defaultPanes[0].key);
-    const [items, setItems] = useState(defaultPanes);
-    const newTabIndex = useRef(0);
-    const onChange = (key: string) => {
-        // setActiveKey(key);
-        navigate(key)
-      };
-      const add = () => {
-        const newActiveKey = `newTab${newTabIndex.current++}`;
-        setItems([...items, { label: 'New Tab', children: 'New Tab Pane', key: newActiveKey }]);
-        setActiveKey(newActiveKey);
-      };
+  // url跳转时记录当前的路径
+  useEffect(() => {
+    setCurRoute(curSubApp, pathname)
+  },[])
+  const onChange = (key: string) => {
+    // 跳转路由，再获取路由信息发送给子应用
+    navigate(curSubApp,key);
+  };
+  // const add = () => {
+  //   const newActiveKey = `newTab${newTabIndex.current++}`;
+  //   setItems([...items, { label: 'New Tab', children: 'New Tab Pane', key: newActiveKey }]);
+  //   setActiveKey(newActiveKey);
+  // };
 
-      const remove = (targetKey: TargetKey) => {
-        const targetIndex = items.findIndex((pane) => pane.key === targetKey);
-        const newPanes = items.filter((pane) => pane.key !== targetKey);
-        if (newPanes.length && targetKey === activeKey) {
-          const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
-          setActiveKey(key);
-        }
-        setItems(newPanes);
-      };
-    
-      const onEdit = (targetKey: TargetKey, action: 'add' | 'remove') => {
-        if (action === 'add') {
-          add();
-        } else {
-          remove(targetKey);
-        }
-      };
-    return (
-      <>
-      <div hidden={!keepalive[location.pathname]}>
-        <Tabs
-          hideAdd
-          onChange={onChange}
-          activeKey={location.pathname}
-          type="editable-card"
-          onEdit={onEdit}
-          items={Object.entries(keepElement).map(([pathname, element]: any) => {
-              return { 
-                  label: `${keepalive[pathname]}`, 
-                  // children: element, 
-                  key: pathname 
-              }
-          })}
-          > 
-        </Tabs>
-      </div>
-        { Object.entries(keepElement).map(([pathname, element]: any) => 
-                <div key ={pathname} hidden={location.pathname !== pathname} >
-                  <Suspense fallback={<h2>🌀 Loading...</h2>}>
-                    {element}
-                    </Suspense>
-                </div>
-            )
-        }
-        { !keepalive[location.pathname] && element}
-         </>
-    )
-}
+  const remove = (targetKey: TargetKey) => {
+    const targetIndex = subAppParams[curSubApp].findIndex((pane) => pane.path === targetKey);
+    const newPanes = subAppParams[curSubApp].filter((pane) => pane.path !== targetKey);
+    if (newPanes.length && targetKey === pathname) {
+      const { path } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
+      setCurRoute(curSubApp,path);
+      navigate(curSubApp,path)
+    }
+    setSubAppParams((tabMap) => ({...tabMap,[curSubApp]:newPanes}));
+  };
+
+  const onEdit = (targetKey: TargetKey, action: 'add' | 'remove') => {
+    if (action === 'remove') {
+      remove(targetKey);
+    }
+  };
+  return (
+    <>
+      {!!curSubApp &&
+        Object.keys(subAppParams).map((key) => {
+          return (
+            <div hidden={key !== curSubApp} key={key}>
+            {/* // <div  key={key}> */}
+              {/*  tab的作用是展示子应用的保存的页面，以及子应用跳转，由子应用通知父应用需要展示及高亮的tab */}
+              <Tabs
+                hideAdd
+                onChange={onChange}
+                onEdit={onEdit}
+                activeKey={pathname}
+                type={subAppParams[key].length > 1 ?"editable-card": "card"}
+                // onEdit={onEdit}
+                items={subAppParams[key].map(({ name, path }: any) => {
+                  return {
+                    label: `${name}`,
+                    key: path,
+                  };
+                })}
+              ></Tabs>
+            </div>
+          );
+        })}
+      <Suspense fallback={<h2>🌀 Loading... </h2>}>
+        {/* 这里渲染的一个子应用的窗口 */}
+        {/* {Object.entries(keepElement).map(([pathname, element]: any) => (
+          <div key={pathname} hidden={pathname !== pathname}>
+              {element}
+          </div>
+        ))} */}
+        {element}
+      </Suspense>
+    </>
+  );
+};
 
 export default PageTabs;

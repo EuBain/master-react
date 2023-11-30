@@ -10,27 +10,27 @@ export const usePageTabs = () =>  {
 
     const addElement =(path:string,element:any) => {
         if(keepElement[path] || !Object.keys(keepalive).includes(path)) return
-        console.log('router更新')
+        // console.log('router更新')
         setKeepElement(l=>{
             return Object.assign({},l,{[path]:element})
         })
     }
 
-    return useMemo(() => {
-        return{
-        addElement,
-        keepElement,
-        keepalive,
-        setKeepalive
-        }
-    }, [keepElement, keepalive])
-
-    // return{
-    //     keepElement,
+    // return useMemo(() => {
+    //     return{
     //     addElement,
+    //     keepElement,
     //     keepalive,
     //     setKeepalive
     //     }
+    // }, [keepElement, keepalive])
+
+    return{
+        keepElement,
+        addElement,
+        keepalive,
+        setKeepalive
+        }
    
 } 
 

@@ -3,11 +3,11 @@ import PageTabs from "@/components/PageTabs";
 // import { Content } from "antd/es/layout/layout"
 
 interface Proptype {
-    background: string,
+    background?: string,
 };
 
 const Container = (props: Proptype) => {
-
+// 没有过多渲染
     const { background } = props
     return (
         <>
