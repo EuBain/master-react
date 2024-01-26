@@ -59,6 +59,7 @@ export const routes = handlerRoutes(route)
 // export const routes = [
 //      ...ErrorPageRoutes,
 // ]
+console.log(route,routes)
 
 export const keepalive = flatRoutes(route)
 // console.log({keepalive})

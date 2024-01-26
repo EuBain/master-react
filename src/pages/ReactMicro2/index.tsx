@@ -4,6 +4,7 @@ import WujieReact from "wujie-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useModel } from "@/stores";
 import { matchHost } from "@/utils/common";
+import { useLink } from "@/utils/hooks";
 
 export default function ReactMicro2() {
   const navigation = useNavigate();
@@ -19,12 +20,13 @@ export default function ReactMicro2() {
   //   const [,childApp,...router] = location.pathname.split('/')
   //   // console.log({childApp,router})
   // },[location.pathname])
-  const {navigate} = useModel('headerNav')
+  // const {navigate} = useModel('routePath')
+  const link = useLink()
   const {addNavList} = useModel('navList')
   const props = {
     addNavList,
     jump: (subApp,name) => {
-      navigate(subApp,`/${subApp}/${name}`);
+      link(subApp,`/${subApp}/${name}`);
     },
   }
   return (

@@ -1,15 +1,15 @@
 import { useState } from "react"
 import createStore from "./createStore";
 import { subAppParamsModel } from "./subAppParamsModel";
-import { headerNavModel } from "./headerNavModel";
+import { routePathModel } from "./routePathModel";
 import { navListModel } from "./navListModel";
 
 
 
 
 const store = createStore(() => ({
-  subAppParams:subAppParamsModel(),
-  headerNav: headerNavModel(),
+  // subAppParams:subAppParamsModel(),
+  routePath: routePathModel(),
   navList: navListModel()
 }))
 

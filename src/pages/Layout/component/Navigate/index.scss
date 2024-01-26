@@ -1,0 +1,40 @@
+.popup {
+  position: fixed;
+  top: 50px !important;
+  > ul {
+    width: 250px;
+    height: 600px;
+
+    .ant-menu-item {
+      width: auto !important;
+      padding-inline: 16px 16px !important;
+    }
+    .ant-menu-item-group-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+    }
+    .ant-menu-item-group-list ::after {
+      position: absolute;
+      inset-inline: 10px;
+      bottom: 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      content: "";
+    }
+    .ant-menu-item-group-list :hover ::after {
+      border-bottom-width: 2px;
+      border-bottom-color: rgb(22, 119, 255);
+    }
+
+    .ant-menu-item-selected {
+    background-color: initial !important;
+    }
+    .ant-menu-item-selected ::after{
+      border-bottom-width: 2px ;
+      border-bottom-color: rgb(22, 119, 255) ;
+    }
+
+  }
+}
