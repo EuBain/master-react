@@ -70,7 +70,7 @@ export const useEmitSubApp = (subApp: string, params: string[]) => {
 
 export const useLink = () => {
   const _navigate = useNavigate();
-  const { setCurRoute, setCurSubAPP, subAppParams, setSubAppParams } =
+  const { setCurRoute, setCurSubAPP } =
     useModel("routePath");
   const link = (subApp: SubAppMap, route: string) => {
     // 新增tab标签页

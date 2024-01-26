@@ -26,14 +26,11 @@ export const navListModel = () => {
   const [navList, setNavList] = useState<SubModel[] | []>([]);
   const [flatNavList, setFlatNavList] = useState([]);
   const addNavList = (params: SubModel) => {
-    // console.log(params)
     setNavList((list: SubModel[]): SubModel[] => {
-      // const newList = [...list,params]
-      // list.find((item) => item.subApp === params.subApp)
+      console.log('子应用已传递路由')
       const newList = Array.from(new Set([...list, params]));
       return newList;
     });
-    // navList.add(params)
   };
   useEffect(() => {
     const dd: {
