@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 // import hostMap from "../hostMap";
 import WujieReact from "wujie-react";
-import { useNavigate, useLocation } from "react-router-dom";
+// import { useNavigate, useLocation } from "react-router-dom";
 import { useModel } from "@/stores";
 import { matchHost } from "@/utils/common";
 import { useLink } from "@/utils/hooks";
 
 export default function ReactMicro2() {
-  const navigation = useNavigate();
+  // const navigation = useNavigate();
   // const location = useLocation();
-  const path = location.pathname.replace("/react16-sub", "").replace("/react16", "").replace("/",""); ////
   // const react16Url = hostMap("//localhost:7600/") + path;
   // console.log(2,window)
   useEffect(() => {
@@ -35,14 +34,9 @@ export default function ReactMicro2() {
       width="100%"
       height="100%"
       name="ReactMicro2"
-      // url={react16Url}
       url={matchHost("8890")}
       sync={false}
       props={props}
     ></WujieReact>
-
-    // <iframe src="https://jenkins.tayrsi.cn/" frameborder="0"></iframe>
-    // <iframe src="http://chat.fancyqb.cn/" frameborder="0"></iframe>
-
   );
 }
