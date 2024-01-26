@@ -14,11 +14,6 @@ interface Proptype {
   background: string;
 }
 
-// items2.push({
-//       key: '/tayrsi/212',
-//       label: `测试`,
-//     }
-//   )
 
 const Navigate = React.memo((props: Proptype) => {
   // const navigate = useNavigate()
@@ -26,14 +21,10 @@ const Navigate = React.memo((props: Proptype) => {
   // let {keepElement, keepalive} = useContext(ContextPageTab)
   const link = useLink();
   const { navList } = useModel("navList");
-  // console.log(navList)
   const { curSubApp, getCurRoute } = useModel("routePath");
-
   const curPath = getCurRoute(curSubApp);
-
-
   const items = handleNavList(navList, curSubApp) ?? LocalNavigate;
-
+  console.log({items,navList})
   const { background } = props;
   return (
     <>
