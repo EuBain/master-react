@@ -30,7 +30,7 @@ const PageTabs = () => {
   // const [curSubApp,SetCurSubAPP] = useState('')
   // const [curPathname, setCurPathname] = useState('')
 
-  useEmitSubApp(curSubApp, params);
+  useEmitSubApp(subApp, params);
   // const { keepElement, addElement, keepalive } = useContext(ContextPageTab);
   // useEffect(() => {
   //   addElement(pathname, element);
