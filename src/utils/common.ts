@@ -1,3 +1,6 @@
+import { SubModel } from "@/stores/navListModel";
+import { SubAppMap } from "@/stores/routePathModel";
+
 export const scrollPageTitle = scrollPageTitleFn()
 
 function scrollPageTitleFn ():any{
@@ -39,6 +42,7 @@ function scrollPageTitleFn ():any{
         // });
     }
 }
+
 const map: Record<string, Record<string, string>> = {
     '8889':{
         production: 'https://www.tayrsi.cn/react-micro1/',
@@ -50,6 +54,40 @@ const map: Record<string, Record<string, string>> = {
     }
 }
 
+export const LocalNavigate = [{
+  "label": "主页",
+  "key": "主页",
+  "children": [
+      {
+          "label": "",
+          "children": [
+              {
+                  "key": "/home",
+                  "label": "主页"
+              }
+          ],
+          "type": "group"
+      }
+  ],
+  "popupClassName": "popup"
+}]
+
+// tab列表
+export const tabMap: Record<string, any> = {
+    ReactMicro: [
+      {
+        name: "首页",
+        path: "/ReactMicro/home",
+      },
+    ],
+    ReactMicro2: [
+      {
+        name: "首页",
+        path: "/ReactMicro2/home",
+      },
+    ],
+  };
+
 export function matchHost (host: keyof typeof map) {
 try {
     if(process.env.NODE_ENV) {
@@ -59,3 +97,31 @@ try {
     return map[host]['development']
 }
 }
+
+// 处理侧边导航栏数据
+export const handleNavList = (navList: SubModel[], curSubApp: SubAppMap) => {
+  const newNavList = navList
+    ?.find((nav: any) => nav.subApp === curSubApp)
+    ?.model?.map((item) => ({
+      label: `${item.model}`,
+      key: `${item.model}`,
+      children: item.modelConfig?.map((_) => {
+        return {
+          // key: `/${curSubApp}/${_.path}`,
+          // label: `${_.name}`,
+          label: _.groupName,
+          children: _.route?.map((route) => {
+            if (route?.redirect) return;
+            return {
+              key: `/${curSubApp}/${route.path}`,
+              label: `${route.name}`,
+            };
+          }),
+          type: "group",
+        };
+      }),
+      popupClassName: "popup",
+      // type:'divider',
+    }));
+  return newNavList;
+};

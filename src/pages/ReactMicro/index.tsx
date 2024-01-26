@@ -1,20 +1,22 @@
 import { useModel } from "@/stores";
 import { matchHost } from "@/utils/common";
+import { useLink } from "@/utils/hooks";
 import React, { useEffect, useState } from "react";
 // import hostMap from "../hostMap";
 import WujieReact from "wujie-react";
 // import { useNavigate, useLocation } from "react-router-dom";
-// import { useEmitSubApp, useLocationPath, useOnSubApp } from "@/utils/hooks";
+// import { useEmitSubApp, useLocationPath} from "@/utils/hooks";
 // import { useModel } from "@/stores";
 
 export default function ReactMicro() {
-  const {navigate} = useModel('headerNav')
+  // const {navigate} = useModel('routePath')
+  const link = useLink()
   const {addNavList} = useModel('navList')
   // console.log(1,window)
   const props = {
     addNavList,
     jump: (subApp,name) => {
-      navigate(subApp,`/${subApp}/${name}`);
+      link(subApp,`/${subApp}/${name}`);
     },
   }
   useEffect(() => {

@@ -1,8 +1,16 @@
 import { AppDispatch, RootStore } from "@/redux/store";
-import { MutableRefObject, useCallback, useEffect, useRef, useState } from "react";
+import { useModel } from "@/stores";
+import { SubAppMap } from "@/stores/routePathModel";
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import WujieReact from "wujie-react";
 const { bus } = WujieReact;
 
@@ -36,24 +44,40 @@ export const useLocationPath = (): [string, string, any] => {
   return [subApp.current, pathname.current, path.current];
 };
 
-const flagMap:any = {};
+// const flagMap:any = {};
 
-// 确保所有子应用都已经挂载
-export const useOnSubApp = (subApp: string, params: string[]) => {
-  // console.log(params)
+// // 确保所有子应用都已经挂载
+// export const useOnSubApp = (subApp: string, params: string[]) => {
+//   // console.log(params)
 
-}
+// }
 
 export const useEmitSubApp = (subApp: string, params: string[]) => {
-  const [flag, setFlag] = useState<any>({})
-  const subAppMount =(subApp: string,boolean: boolean) => {
-    setFlag((flag:any) => ({...flag,[subApp]:boolean}) )
-  }
+  const [flag, setFlag] = useState<any>({});
+  const subAppMount = (subApp: string, boolean: boolean) => {
+    setFlag((flag: any) => ({ ...flag, [subApp]: boolean }));
+  };
   useEffect(() => {
     bus.$on("ReactMicroMount", subAppMount);
     bus.$on("ReactMicro2Mount", subAppMount);
-  },[])
+  }, []);
   useEffect(() => {
-    if(flag[subApp]) { bus.$emit(`${subApp}Change`, params);}
-  }, [params,flag[subApp]]);
+    if (flag[subApp]) {
+      bus.$emit(`${subApp}Change`, params);
+    }
+  }, [params, flag[subApp]]);
 };
+
+export const useLink = () => {
+  const _navigate = useNavigate();
+  const { setCurRoute, setCurSubAPP, subAppParams, setSubAppParams } =
+    useModel("routePath");
+  const link = (subApp: SubAppMap, route: string) => {
+    // 新增tab标签页
+    setCurRoute(subApp, route);
+    setCurSubAPP(subApp);
+    _navigate(route)
+  };
+  return link;
+};
+

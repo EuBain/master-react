@@ -1,6 +1,6 @@
 import { useModel } from "@/stores";
-import { SubAppMap } from "@/stores/headerNavModel";
-import { useLocationPath } from "@/utils/hooks";
+import { SubAppMap } from "@/stores/routePathModel";
+import { useLink, useLocationPath } from "@/utils/hooks";
 import { Menu, MenuProps } from "antd"
 import { Header } from "antd/es/layout/layout"
 import { log } from "console";
@@ -30,7 +30,8 @@ const MyHeader = () => {
   // const [subApp,pathname,params] = useLocationPath()
   // const [current, setCurrent] = useState('ReactMicro');
   const anavigate = useNavigate()
-  const { getCurRoute,setCurRoute, curSubApp, setCurSubAPP, navigate } = useModel('headerNav')
+  const link = useLink()
+  const { getCurRoute,setCurRoute, curSubApp, setCurSubAPP } = useModel('routePath')
   // console.log('头部栏重新渲染')
   // 点击时选择当前的子应用
   // console.log(curSubApp)
@@ -38,8 +39,8 @@ const MyHeader = () => {
     const key:SubAppMap = e.key as SubAppMap
     setCurSubAPP(key)
     let route = getCurRoute(key)
-    if(!route) route = `${key}/home`
-    navigate(key,route)
+    if(!route) route = `/${key}/home`
+    link(key,route)
   };
     return (
       <>
