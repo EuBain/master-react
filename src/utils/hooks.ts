@@ -58,11 +58,12 @@ export const useEmitSubApp = (subApp: string, params: string[]) => {
     setFlag((flag: any) => ({ ...flag, [subApp]: boolean }));
   };
   useEffect(() => {
+    console.log('监听子应用挂载情况')
     bus.$on("ReactMicroMount", subAppMount);
     bus.$on("ReactMicro2Mount", subAppMount);
   }, []);
   useEffect(() => {
-    if (flag[subApp]) {
+    if (!!flag[subApp]) {
       bus.$emit(`${subApp}Change`, params);
     }
   }, [params, flag[subApp]]);
