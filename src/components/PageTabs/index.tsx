@@ -1,57 +1,31 @@
-// import { changeKeepElement } from "@/redux/slice/pageTabSlice";
-// import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { Tabs } from "antd";
-import { Suspense, useContext, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useOutlet } from "react-router-dom";
-// import { keepalive } from "@/routers";
-import ContextPageTab from "@/context/ContextPageTabs";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import WujieReact from "wujie-react";
 import { useEmitSubApp, useLocationPath, useLink } from "@/utils/hooks";
 import { useModel } from "@/stores";
-const { bus } = WujieReact;
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 const PageTabs = () => {
+  const { getCurRoute, setCurRoute, curSubApp, subAppParams, setSubAppParams } =
+    useModel("routePath");
+  const { navList, flatNavList } = useModel("navList");
+
   const [subApp, pathname, params] = useLocationPath();
   const link = useLink();
   const _navigate = useNavigate();
-  const element = useOutlet();
-  // const {subAppParams, setSubAppParams} = useModel('subAppParams')
-  const {
-    getCurRoute,
-    setCurRoute,
-    curSubApp,
-    setCurSubAPP,
-    subAppParams,
-    setSubAppParams,
-  } = useModel("routePath");
-  const { navList, flatNavList } = useModel("navList");
-  // const [curSubApp,SetCurSubAPP] = useState('')
-  // const [curPathname, setCurPathname] = useState('')
 
   useEmitSubApp(subApp, params);
-  // const { keepElement, addElement, keepalive } = useContext(ContextPageTab);
-  // useEffect(() => {
-  //   addElement(pathname, element);
-  // }, [pathname]);
 
-  // url跳转时记录当前的路径
-  useEffect(() => {
-    setCurRoute(curSubApp, pathname);
-  }, []);
-  const onChange = (key: string) => {
-    // 跳转路由，再获取路由信息发送给子应用
-    link(curSubApp, key);
-  };
-
-  useEffect(() => {
-    if (
-      navList.find((item) => item.subApp === subApp) &&
-      !flatNavList.find((item) => item.path === pathname)
-    ) {
-      _navigate("/503");
-    }
+  const addTabs = (
+    navList: any[],
+    flatNavList: any[],
+    subAppParams: { [x: string]: any[] },
+    subApp: string | number,
+    pathname: string,
+    setSubAppParams: (arg0: (item: any) => any) => void
+  ) => {
     if (
       navList.find((item) => item.subApp === subApp) &&
       // flatNavList?.length &&
@@ -67,13 +41,17 @@ const PageTabs = () => {
       });
       setSubAppParams((item) => ({ ...item, [subApp]: newPanes }));
     }
-  }, [pathname, flatNavList]);
+  };
 
   // const add = () => {
   //   const newActiveKey = `newTab${newTabIndex.current++}`;
   //   setItems([...items, { label: 'New Tab', children: 'New Tab Pane', key: newActiveKey }]);
   //   setActiveKey(newActiveKey);
   // };
+  const onChange = (key: string) => {
+    // 跳转路由，再获取路由信息发送给子应用
+    link(curSubApp, key);
+  };
 
   const remove = (targetKey: TargetKey) => {
     const targetIndex = subAppParams[curSubApp].findIndex(
@@ -98,6 +76,25 @@ const PageTabs = () => {
       remove(targetKey);
     }
   };
+
+  useEffect(() => {
+    // 处理路由不存在的情况
+    if (
+      navList.find((item) => item.subApp === subApp) &&
+      !flatNavList.find((item) => item.path === pathname)
+    ) {
+      _navigate("/503");
+    }
+    // 新增tab标签页
+    addTabs(
+      navList,
+      subAppParams,
+      subApp,
+      pathname,
+      flatNavList,
+      setSubAppParams
+    );
+  }, [pathname, flatNavList]);
 
   return (
     <>
@@ -124,15 +121,6 @@ const PageTabs = () => {
             </div>
           );
         })}
-      <Suspense fallback={<h2>🌀 Loading... </h2>}>
-        {/* 这里渲染的一个子应用的窗口 */}
-        {/* {Object.entries(keepElement).map(([pathname, element]: any) => (
-          <div key={pathname} hidden={pathname !== pathname}>
-              {element}
-          </div>
-        ))} */}
-        {element}
-      </Suspense>
     </>
   );
 };

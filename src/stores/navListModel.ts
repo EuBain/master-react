@@ -27,7 +27,6 @@ export const navListModel = () => {
   const [flatNavList, setFlatNavList] = useState([]);
   const addNavList = (params: SubModel) => {
     setNavList((list: SubModel[]): SubModel[] => {
-      console.log('子应用已传递路由')
       const newList = Array.from(new Set([...list, params]));
       return newList;
     });

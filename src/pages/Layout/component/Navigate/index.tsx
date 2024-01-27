@@ -9,22 +9,22 @@ import "./index.scss";
 import { useLink } from "@/utils/hooks";
 import { LocalNavigate, handleNavList } from "@/utils/common";
 
-
 interface Proptype {
   background: string;
 }
 
-
 const Navigate = React.memo((props: Proptype) => {
-  // const navigate = useNavigate()
-  // const location = useLocation();
-  // let {keepElement, keepalive} = useContext(ContextPageTab)
-  const link = useLink();
   const { navList } = useModel("navList");
   const { curSubApp, getCurRoute } = useModel("routePath");
-  const curPath = getCurRoute(curSubApp);
+  const [curPath, setCurPath] = useState("");
+  const link = useLink();
+
+  useEffect(() => {
+    setCurPath(getCurRoute(curSubApp));
+  }, [getCurRoute(curSubApp)]);
+
   const items = handleNavList(navList, curSubApp) ?? LocalNavigate;
-  console.log({items,navList})
+
   const { background } = props;
   return (
     <>
