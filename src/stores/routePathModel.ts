@@ -11,6 +11,8 @@ const curRoute = new Map();
 export const routePathModel = () => {
   // const [curRoute, setCurRoute] = useState('ReactMicro/home')
   // const [, setFlag] = useState([])
+ 
+  // 展示的tabs
   const [subAppParams, setSubAppParams] = useState<Record<string, any>>(tabMap);
 
   const [subApp, pathname, params] = useLocationPath();
