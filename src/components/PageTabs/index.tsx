@@ -1,7 +1,6 @@
 import { Tabs } from "antd";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import WujieReact from "wujie-react";
 import { useEmitSubApp, useLocationPath, useLink } from "@/utils/hooks";
 import { useModel } from "@/stores";
 
@@ -17,31 +16,6 @@ const PageTabs = () => {
   const _navigate = useNavigate();
 
   useEmitSubApp(subApp, params);
-
-  const addTabs = (
-    navList: any[],
-    flatNavList: any[],
-    subAppParams: { [x: string]: any[] },
-    subApp: string | number,
-    pathname: string,
-    setSubAppParams: (arg0: (item: any) => any) => void
-  ) => {
-    if (
-      navList.find((item) => item.subApp === subApp) &&
-      // flatNavList?.length &&
-      subAppParams[subApp] &&
-      !subAppParams[subApp].find(
-        (item: { path: string }) => item.path === pathname
-      )
-    ) {
-      let newPanes = subAppParams[subApp];
-      newPanes.push({
-        name: flatNavList.find((i) => i.path === pathname)?.name ?? pathname,
-        path: pathname,
-      });
-      setSubAppParams((item) => ({ ...item, [subApp]: newPanes }));
-    }
-  };
 
   // const add = () => {
   //   const newActiveKey = `newTab${newTabIndex.current++}`;
@@ -65,7 +39,7 @@ const PageTabs = () => {
         newPanes[
           targetIndex === newPanes.length ? targetIndex - 1 : targetIndex
         ];
-      setCurRoute(curSubApp, path);
+      // setCurRoute(curSubApp, path);
       link(curSubApp, path);
     }
     setSubAppParams((tabMap) => ({ ...tabMap, [curSubApp]: newPanes }));
@@ -81,19 +55,29 @@ const PageTabs = () => {
     // 处理路由不存在的情况
     if (
       navList.find((item) => item.subApp === subApp) &&
-      !flatNavList.find((item) => item.path === pathname)
+      !flatNavList.find((item: { path: string }) => item.path === pathname)
     ) {
       _navigate("/503");
     }
     // 新增tab标签页
-    addTabs(
-      navList,
-      subAppParams,
-      subApp,
-      pathname,
-      flatNavList,
-      setSubAppParams
-    );
+    if (
+      navList.find((item) => item.subApp === subApp) &&
+      // flatNavList?.length &&
+      subAppParams[subApp] &&
+      !subAppParams[subApp].find(
+        (item: { path: string }) => item.path === pathname
+      )
+    ) {
+      let newPanes = subAppParams[subApp];
+      newPanes.push({
+        name:
+          flatNavList.find(
+            (i: { path: string; name: string }) => i.path === pathname
+          )?.name ?? pathname,
+        path: pathname,
+      });
+      setSubAppParams((item) => ({ ...item, [subApp]: newPanes }));
+    }
   }, [pathname, flatNavList]);
 
   return (
