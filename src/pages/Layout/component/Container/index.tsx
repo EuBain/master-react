@@ -13,7 +13,7 @@ const Container = (props: Proptype) => {
   return (
     <>
       <PageTabs></PageTabs>
-      {children}
+      <div style={{ overflow: "hidden" }}>{children}</div>
     </>
   );
 };
