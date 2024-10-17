@@ -10,7 +10,7 @@ type Route = {
 
 type ModelConfig = {
   groupName: string;
-  route: Route[];
+  routes: Route[];
 };
 
 type Model = {

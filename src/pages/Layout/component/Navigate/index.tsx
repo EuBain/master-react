@@ -1,7 +1,13 @@
 import ContextPageTab from "@/context/ContextPageTabs";
 import { Menu, MenuProps } from "antd";
 import Sider from "antd/es/layout/Sider";
-import React, { startTransition, useContext, useEffect, useState } from "react";
+import React, {
+  startTransition,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomeRoutes } from "@/routers/Home";
 import { useModel } from "@/stores";
@@ -23,7 +29,10 @@ const Navigate = React.memo((props: Proptype) => {
     setCurPath(getCurRoute(curSubApp));
   }, [getCurRoute(curSubApp)]);
 
-  const items = handleNavList(navList, curSubApp) ?? LocalNavigate;
+  const items = useMemo(
+    () => handleNavList(navList, curSubApp) ?? LocalNavigate,
+    [curSubApp, navList]
+  );
 
   const { background } = props;
   return (

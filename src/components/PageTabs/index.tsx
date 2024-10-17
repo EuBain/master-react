@@ -57,7 +57,7 @@ const PageTabs = () => {
       navList.find((item) => item.subApp === subApp) &&
       !flatNavList.find((item: { path: string }) => item.path === pathname)
     ) {
-      _navigate("/503");
+      // _navigate("/503");
     }
     // 新增tab标签页
     if (

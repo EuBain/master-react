@@ -36,11 +36,11 @@ WujieReact.setupApp({
 });
 WujieReact.preloadApp({
   name:'ReactMicro',
-  url:matchHost("8889"),
+  url:matchHost("8889") as string,
 })
 WujieReact.preloadApp({
   name:'ReactMicro2',
-  url: matchHost("8890"),
+  url: matchHost("8890") as string,
 })
 // WujieReact.setupApp({
 //   name: "tayrsi",

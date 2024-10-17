@@ -23,25 +23,25 @@ export const useAppSelector: TypedUseSelectorHook<RootStore> = useSelector;
  * @returns [子应用，pathname，传给子应用的路由]
  */
 export const useLocationPath = (): [string, string, any] => {
-  const subApp = useRef<string>("ReactMicro");
-  const path = useRef<string[]>(["home"]);
+  let { current: subApp } = useRef<string>("ReactMicro");
+  let { current: path } = useRef<string[]>(["home"]);
 
   // const [subApp, setSubApp] = useState<string>("ReactMicro");
   // const [path, setPath] = useState<string[]>(['home']);
-  const pathname = useRef<string>("/ReactMicro/home");
+  let { current: pathname } = useRef<string>("/ReactMicro/home");
   const location = useLocation();
 
-  pathname.current = location.pathname;
+  pathname = location.pathname;
   const [, thisSubApp, ...router] = location.pathname.split("/");
-  subApp.current = thisSubApp;
-  path.current = router;
+  subApp = thisSubApp;
+  path = router;
   // useEffect(() => {
 
   //   // setSubApp(thisSubApp)
   //   // setPath(router)
   // }, [pathname.current]);
 
-  return [subApp.current, pathname.current, path.current];
+  return [subApp, pathname, path] as const;
 };
 
 // const flagMap:any = {};
@@ -58,7 +58,7 @@ export const useEmitSubApp = (subApp: string, params: string[]) => {
     setFlag((flag: any) => ({ ...flag, [subApp]: boolean }));
   };
   useEffect(() => {
-    console.log('监听子应用挂载情况')
+    console.log("监听子应用挂载情况");
     bus.$on("ReactMicroMount", subAppMount);
     bus.$on("ReactMicro2Mount", subAppMount);
   }, []);
@@ -71,14 +71,12 @@ export const useEmitSubApp = (subApp: string, params: string[]) => {
 
 export const useLink = () => {
   const _navigate = useNavigate();
-  const { setCurRoute, setCurSubAPP } =
-    useModel("routePath");
+  const { setCurRoute, setCurSubAPP } = useModel("routePath");
   const link = (subApp: SubAppMap, route: string) => {
     // 新增tab标签页
     setCurRoute(subApp, route);
     setCurSubAPP(subApp);
-    _navigate(route)
+    _navigate(route);
   };
   return link;
 };
-

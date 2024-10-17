@@ -49,7 +49,7 @@ export const HomeRoutes: RoutesType[] =[
             },
             {
                 name: 'ReactMicroPath',
-                path: 'ReactMicro/:path',
+                path: 'ReactMicro/*',
                 element: 'ReactMicro',
                 keepalive: true,
             },
@@ -62,7 +62,7 @@ export const HomeRoutes: RoutesType[] =[
             },
             {
                 name: 'ReactMicro2Path',
-                path: 'ReactMicro2/:path',
+                path: 'ReactMicro2/*',
                 element: 'ReactMicro2',
                 keepalive: true,
             },
